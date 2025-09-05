@@ -31,6 +31,12 @@ jobs:
 
       - name: Build archive
         run: |
+          if ! ls *.xcodeproj 1>/dev/null 2>&1 && \
+             ! ls *.xcworkspace 1>/dev/null 2>&1 && \
+             [ ! -f Package.swift ]; then
+            echo "Missing Xcode project, workspace, or Package.swift." >&2
+            exit 1
+          fi
           xcodebuild -scheme "GPU-Terminal" \
             -configuration Release \
             -sdk iphoneos \
