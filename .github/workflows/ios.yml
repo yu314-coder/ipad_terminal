@@ -24,7 +24,11 @@ jobs:
           P12_BASE64: ${{ secrets.IOS_CERT_P12_BASE64 }}
           P12_PASSWORD: ${{ secrets.IOS_CERT_P12_PASSWORD }}
         run: |
-          echo "$P12_BASE64" | base64 --decode > signing.p12
+          if [ -z "$P12_BASE64" ] || [ -z "$P12_PASSWORD" ]; then
+            echo "Missing signing certificate or password. Did you set IOS_CERT_P12_BASE64 and IOS_CERT_P12_PASSWORD secrets?" >&2
+            exit 1
+          fi
+          echo -n "$P12_BASE64" | base64 --decode > signing.p12
           security create-keychain -p "" build.keychain
           security import signing.p12 -k ~/Library/Keychains/build.keychain -P "$P12_PASSWORD" -T /usr/bin/codesign
           security list-keychains -s ~/Library/Keychains/build.keychain
