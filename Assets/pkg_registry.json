@@ -1,0 +1,22 @@
+[
+  {
+    "name": "whisper-tiny.en",
+    "type": "model",
+    "url": "https://example.com/models/whisper-tiny.en.ggml",
+    "sha256": "<put-sha256>",
+    "desc": "Whisper tiny English (ggml)"
+  },
+  {
+    "name": "rich",
+    "type": "pip",
+    "pkg": "rich",
+    "desc": "Rich text in the terminal (pure-Python)"
+  },
+  {
+    "name": "llama-3.1-8b-coreml",
+    "type": "model",
+    "url": "https://example.com/models/llama-3.1-8b.coremlpackage.zip",
+    "sha256": "<put-sha256>",
+    "desc": "Core ML transformer package"
+  }
+]
